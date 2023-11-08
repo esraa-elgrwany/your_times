@@ -2,6 +2,20 @@ abstract class HomeStates {}
 
 class HomeInitState extends HomeStates {}
 
+class HomeChangeSource extends HomeStates {}
+
+class HomeGetSearch extends HomeStates {}
+
+class HomeSetSearch extends HomeStates {}
+
+class HomeGetDrawer extends HomeStates {}
+
+class HomeGetCategory extends HomeStates {}
+
+class HomeChangeLanguage extends HomeStates {}
+
+class HomeChangeTheme extends HomeStates {}
+
 class HomeGetSourcesLoadingState extends HomeStates {}
 
 class HomeGetSourcesErrorState extends HomeStates {}

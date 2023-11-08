@@ -1,3 +1,6 @@
+import 'package:esraa_news_app/layouts/home_cubit/cubit.dart';
+import 'package:esraa_news_app/layouts/home_cubit/states.dart';
+import 'package:esraa_news_app/layouts/repo/data_sources/remote_ds.dart';
 import 'package:esraa_news_app/models/category-model.dart';
 import 'package:esraa_news_app/screens/Drawer_tab.dart';
 import 'package:esraa_news_app/screens/TabWidget.dart';
@@ -7,6 +10,7 @@ import 'package:esraa_news_app/shared/network/remote/api_manager.dart';
 import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:esraa_news_app/shared/styles/my_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -17,28 +21,36 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-  bool searched = false;
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController searchController = TextEditingController();
     List<CategoryModel> category = CategoryModel.getCategory();
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("assets/images/pattern.png"), fit: BoxFit.fill),
-        color: Colors.white,
-      ),
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          drawer: DrawerTab(onDrawerClick),
-          appBar: searched
-              ? AppBar(
+    return BlocProvider(
+      create: (context) => HomeCubit(RemoteDs()),
+      child: BlocConsumer<HomeCubit,HomeStates>(
+        listener: (context, state) {
+        },
+        builder: (context, state) {
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/pattern.png"),
+                  fit: BoxFit.fill),
+              color: Colors.white,
+            ),
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                drawer: DrawerTab(onDrawerClick),
+                appBar: HomeCubit
+                    .get(context)
+                    .searched
+                    ? AppBar(
                   toolbarHeight: 70,
                   centerTitle: true,
                   backgroundColor: green,
                   titleTextStyle:
-                      GoogleFonts.exo(color: Colors.white, fontSize: 22),
+                  GoogleFonts.exo(color: Colors.white, fontSize: 22),
                   shape: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.only(
@@ -47,19 +59,14 @@ class _HomeLayoutState extends State<HomeLayout> {
                   title: Container(
                     margin: EdgeInsets.all(8),
                     child: TextFormField(
-                      controller: searchController,
+                      //controller: searchController,
                       onChanged: (value) {
-                        setState(() {});
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "please enter an article";
-                        }
-                        return null;
+                        HomeCubit.get(context).
+                        getSearch(value);
                       },
                       decoration: InputDecoration(
                         contentPadding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         filled: true,
                         fillColor: Colors.white,
                         suffixIcon: IconButton(
@@ -68,8 +75,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                         prefixIcon: IconButton(
                             onPressed: () {
                               searchController.clear();
-                              searched == false;
-                              setState(() {});
+                              HomeCubit.get(context).setSearch();
                             },
                             icon: Icon(Icons.close)),
                         prefixIconColor: green,
@@ -92,11 +98,11 @@ class _HomeLayoutState extends State<HomeLayout> {
                     ),
                   ),
                 )
-              : AppBar(
+                    : AppBar(
                   centerTitle: true,
                   backgroundColor: green,
                   titleTextStyle:
-                      GoogleFonts.exo(color: Colors.white, fontSize: 22),
+                  GoogleFonts.exo(color: Colors.white, fontSize: 22),
                   shape: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.only(
@@ -108,22 +114,23 @@ class _HomeLayoutState extends State<HomeLayout> {
                       padding: const EdgeInsets.all(8),
                       child: IconButton(
                           onPressed: () {
-                            searched = true;
-                            setState(() {});
+                            HomeCubit.get(context).setSearch();
                           },
                           icon: Icon(
                             Icons.search,
-                            size: 30,
                           )),
                     )
                   ],
                 ),
-          body: categoryModel == null
-              ? CategoryTab(category, onCatClick)
-              : NewsTab(
-                  categoryModel!.id,
+                body: categoryModel == null
+                    ? CategoryTab(category, onCatClick)
+                    : NewsTab(
+                  categoryModel!,
                   search: searchController.text,
                 )),
+          );
+        },
+      ),
     );
   }
 

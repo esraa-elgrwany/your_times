@@ -1,57 +1,36 @@
+import 'package:esraa_news_app/layouts/home_cubit/cubit.dart';
 import 'package:esraa_news_app/models/SourceResponse.dart';
 import 'package:esraa_news_app/screens/chip.dart';
 import 'package:esraa_news_app/screens/news_item.dart';
 import 'package:esraa_news_app/shared/network/remote/api_manager.dart';
 import 'package:flutter/material.dart';
 
-class TabWidget extends StatefulWidget{
-  List<Sources> sources;
-  String? search;
-   TabWidget(this.sources,{this.search});
-
-  @override
-  State<TabWidget> createState() => _TabWidgetState();
-}
-
-class _TabWidgetState extends State<TabWidget> {
-  int selectedIndex=0;
+class TabWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DefaultTabController(length:widget.sources.length , child:
+        DefaultTabController( length:HomeCubit.get(context).sourcesList.length ,
+            child:
         TabBar(
           isScrollable: true,
           onTap: (index) {
-            selectedIndex=index;
-            setState(() {
-            });
+           HomeCubit.get(context).changeSource(index);
           },
           indicatorColor: Colors.transparent,
           tabs:
-          widget.sources.map((source) =>Tab(
-            child: ChipItem(source,widget.sources.indexOf(source)==selectedIndex),
+          HomeCubit.get(context).sourcesList.map((source) =>Tab(
+            child: ChipItem(source, HomeCubit.get(context).sourcesList.indexOf(source)== HomeCubit.get(context).selectedIndex),
           ) ).toList()
         )),
-        FutureBuilder(future:ApiManager.getNews(widget.sources[selectedIndex].id??"",
-            search:widget.search ) ,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(child: Text("Something went wrong"));
-              }
-              var newsList = snapshot.data?.articles ?? [];
-              return Expanded(
+           Expanded(
                 child: ListView.builder(itemBuilder: (context, index) {
-                  return NewsItem(newsList[index]);
+                  return NewsItem(HomeCubit.get(context).articlesList[index]);
                 },
-                  itemCount: newsList.length,
+                  itemCount:HomeCubit.get(context).articlesList.length,
                 ),
-              );
-            } ),
+    )
       ],
     ) ;
   }

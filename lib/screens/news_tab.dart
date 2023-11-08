@@ -1,25 +1,49 @@
+import 'package:esraa_news_app/layouts/home_cubit/cubit.dart';
+import 'package:esraa_news_app/layouts/home_cubit/states.dart';
+import 'package:esraa_news_app/layouts/repo/data_sources/remote_ds.dart';
+import 'package:esraa_news_app/models/category-model.dart';
 import 'package:esraa_news_app/screens/TabWidget.dart';
 import 'package:esraa_news_app/shared/network/remote/api_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NewsTab extends StatelessWidget{
-  String cat_Id;
+class NewsTab extends StatelessWidget {
+  CategoryModel cat;
   String? search;
-NewsTab(this.cat_Id,{this.search});
+
+  NewsTab(this.cat, {this.search});
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: FutureBuilder(future: ApiManager.getSources(cat_Id),
-        builder:(context, snapshot) {
-          if(snapshot.connectionState==ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator());
+    return BlocProvider(
+      create: (context) => HomeCubit(RemoteDs())..getSources(cat.id),
+      child: BlocConsumer<HomeCubit, HomeStates>(
+        listener: (context, state) {
+          if (state is HomeGetSourcesLoadingState|| state is HomeGetNewsLoadingState) {
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => AlertDialog(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                title: Center(child: CircularProgressIndicator()),
+              ),
+            );
+          }else if(state is HomeGetSourcesSuccessState || state is HomeChangeSource){
+            HomeCubit.get(context).getNews(search: search);
           }
-          if(snapshot.hasError){
-            return Center(child: Text("Something went wrong"));
+          else if(state is HomeGetNewsSuccessState){
+            Navigator.pop(context);
           }
-          var sources=snapshot.data?.sources??[];
-          return TabWidget(sources,search: search,);
+        },
+        builder: (context, state) {
+    if (state is HomeGetSourcesLoadingState) {
+      return Center(child: CircularProgressIndicator());
+    }
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TabWidget(
+              ));
         },
       ),
     );
