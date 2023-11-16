@@ -1,10 +1,17 @@
 {
-  "appTitle": " قائمة المهام",
+  "appTitle": "الاخبار",
+  "sports": "الرياضة",
+  "politics":"السياسة"  ,
+  "health": "الصحة",
+  "business": "الاعمال",
+  "environment": "البيئة",
+  "science": "العلوم",
   "lang": "اللغة",
   "en": "انجليزي",
   "ar": "عربي",
   "theme": "السمات",
   "dark": "غامق",
   "light": "فاتح",
-  "setting": "الاعدادات"
+  "setting": "الاعدادات",
+  "category": "الفئات"
 }

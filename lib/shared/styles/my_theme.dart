@@ -8,7 +8,7 @@ class MyThemeData{
   static ThemeData lightTheme=ThemeData(
     colorScheme: ColorScheme(
         brightness: Brightness.light,
-        primary:green, onPrimary:Colors.white10, secondary: Colors.black,
+        primary:green, onPrimary:green, secondary: Colors.black,
         onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
         background:Colors.white,
         onBackground:Colors.white,
@@ -40,17 +40,17 @@ class MyThemeData{
   );
   static ThemeData darkTheme=ThemeData(
     colorScheme: ColorScheme(
-        brightness: Brightness.light,
-        primary:green, onPrimary:Colors.white10, secondary: Colors.black,
+        brightness: Brightness.dark,
+        primary:Colors.grey, onPrimary:Colors.white10, secondary: Colors.black,
         onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
-        background:Colors.white,
+        background:Colors.grey,
         onBackground:Colors.white,
         surface:Colors.white,
         onSurface: Colors.black),
 
     appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: green,
+        color: Colors.black,
         iconTheme: IconThemeData(
             color: Colors.white
         )
@@ -63,7 +63,7 @@ class MyThemeData{
       bodyMedium: GoogleFonts.poppins(
         fontSize: 22,
         fontWeight: FontWeight.bold,
-        color:grey,
+        color:Colors.white,
       ),
       bodyLarge: GoogleFonts.exo(
         fontSize: 22,

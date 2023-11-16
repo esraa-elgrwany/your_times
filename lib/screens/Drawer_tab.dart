@@ -1,6 +1,7 @@
 import 'package:esraa_news_app/screens/setting/setting_tab.dart';
 import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DrawerTab extends StatelessWidget {
   Function onClick;
@@ -26,7 +27,7 @@ class DrawerTab extends StatelessWidget {
               height: 100,
               child: Center(
                   child: Text(
-                "News App!",
+                AppLocalizations.of(context)!.appTitle,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
@@ -52,7 +53,7 @@ class DrawerTab extends StatelessWidget {
                               size: 25,
                               color: grey,
                             )),
-                        Text("Categories",
+                        Text(AppLocalizations.of(context)!.category,
                             style: Theme.of(context).textTheme.bodyMedium),
                       ],
                     ),
@@ -60,14 +61,14 @@ class DrawerTab extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       onClick(set_id);
-                     // Navigator.pushNamedAndRemoveUntil(
-                         // context, SettingTab.routeName, (route) => false);
+                      Navigator.pushNamed(context,SettingTab.routeName);
                     },
                     child: Row(
                       children: [
                         IconButton(
                             onPressed: () {
                               onClick(set_id);
+                              Navigator.pushNamed(context,SettingTab.routeName);
                             },
                             icon: Icon(
                               Icons.settings,
@@ -77,7 +78,7 @@ class DrawerTab extends StatelessWidget {
                         SizedBox(
                           width: 4,
                         ),
-                        Text("Setting",
+                        Text(AppLocalizations.of(context)!.setting,
                             style: Theme.of(context).textTheme.bodyMedium),
                       ],
                     ),

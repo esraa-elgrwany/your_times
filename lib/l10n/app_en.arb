@@ -1,10 +1,17 @@
 {
-  "appTitle": "To Do List",
+  "appTitle": "News App",
+  "sports": "Sports",
+  "politics":"Politics"  ,
+  "health": "Health",
+  "business": "Business",
+  "environment":"Environment",
+  "science": "Science",
   "lang": "Language",
   "en": "English",
   "ar": "arabic",
   "theme": "Theming",
   "dark": "Dark",
   "light": "Light",
-  "setting": "Settings"
+  "setting": "Settings",
+  "category": "Category"
 }

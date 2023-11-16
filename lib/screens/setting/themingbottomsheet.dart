@@ -1,6 +1,10 @@
 import 'package:esraa_news_app/layouts/home_cubit/cubit.dart';
+import 'package:esraa_news_app/layouts/home_cubit/states.dart';
+import 'package:esraa_news_app/layouts/main_cubit/main_cubit.dart';
+import 'package:esraa_news_app/layouts/repo/data_sources/remote_ds.dart';
 import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
@@ -9,14 +13,21 @@ class ThemingBottomSheet extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+  create: (context) => HomeCubit(RemoteDs()),
+  child: BlocConsumer<HomeCubit,HomeStates>(
+  listener: (context, state) {
+
+  },
+  builder: (context, state) {
     return Container(
-      color: Theme.of(context).colorScheme.surface,
+      color: Theme.of(context).colorScheme.background,
       padding: EdgeInsets.all(12),
       child: Column(
         children: [
           InkWell(
             onTap: () {
-              HomeCubit.get(context).changeMode(ThemeMode.light);
+              MainCubit.get(context).changeMode(ThemeMode.light);
             },
             child: Row(
               children: [
@@ -25,27 +36,27 @@ class ThemingBottomSheet extends StatelessWidget{
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!.copyWith(
-                      color:Theme.of(context).colorScheme.onSurface
+                      color:Theme.of(context).colorScheme.onPrimary
                   )
                 ),
                 Spacer(),
-                (HomeCubit.get(context).modeApp==ThemeMode.
+                (MainCubit.get(context).modeApp==ThemeMode.
                 light)
                     ? Icon(Icons.done,
-                    size: 25, color:Theme.of(context).colorScheme.onSurface)
+                    size: 25, color:Theme.of(context).colorScheme.onPrimary)
                     : SizedBox.shrink(),
               ],
             ),
           ),
           Divider(
-            color: green,
+            color:Theme.of(context).colorScheme.onPrimary,
             thickness: 2,
             indent: 40,
             endIndent: 40,
           ),
           InkWell(
             onTap: () {
-              HomeCubit.get(context).changeMode(ThemeMode.dark);
+              MainCubit.get(context).changeMode(ThemeMode.dark);
             },
             child: Row(
               children: [
@@ -54,15 +65,15 @@ class ThemingBottomSheet extends StatelessWidget{
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!.copyWith(
-                      color:Theme.of(context).colorScheme.onSurface
+                      color:Theme.of(context).colorScheme.onPrimary
                   )
                 ),
                 Spacer(),
-                (HomeCubit.get(context).modeApp==ThemeMode.light)
+                (MainCubit.get(context).modeApp==ThemeMode.light)
                     ? SizedBox.shrink()
                     : Icon(
                   Icons.done,
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   size: 25,
                 ),
               ],
@@ -71,5 +82,8 @@ class ThemingBottomSheet extends StatelessWidget{
         ],
       ),
     );
+  },
+),
+);
   }
 }

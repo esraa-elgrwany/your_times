@@ -1,5 +1,6 @@
 import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryModel{
   String name;

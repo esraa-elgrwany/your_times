@@ -21,7 +21,8 @@ class TabWidget extends StatelessWidget{
           indicatorColor: Colors.transparent,
           tabs:
           HomeCubit.get(context).sourcesList.map((source) =>Tab(
-            child: ChipItem(source, HomeCubit.get(context).sourcesList.indexOf(source)== HomeCubit.get(context).selectedIndex),
+            child: ChipItem(source, HomeCubit.get(context).sourcesList.
+            indexOf(source)== HomeCubit.get(context).selectedIndex),
           ) ).toList()
         )),
            Expanded(

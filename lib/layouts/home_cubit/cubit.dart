@@ -20,12 +20,10 @@ class HomeCubit extends Cubit<HomeStates> {
   List<Sources>sourcesList=[];
   List<Articles> articlesList=[];
   int selectedIndex=0;
-  String searchValue="";
-  bool searched=false;
-  String languageCode="en";
-  ThemeMode modeApp=ThemeMode.light;
-  List<CategoryModel> category = CategoryModel.getCategory();
-  CategoryModel? categoryModel = null;
+//  bool searched=false;
+//  String search='';
+
+ // TextEditingController searchController=TextEditingController();
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
@@ -35,17 +33,15 @@ class HomeCubit extends Cubit<HomeStates> {
    emit(HomeChangeSource());
   }
 
-  getSearch(String search){
-    //emit(HomeInitState());
-    searchValue=search;
+/*  getSearch(String search1){search=search1;
     emit(HomeGetSearch());
   }
   setSearch(){
    // emit(HomeInitState());
    searched=!searched;
    emit(HomeSetSearch());
-  }
-  
+  }*/
+
    Future <void> getSources(String catId) async {
      emit(HomeGetSourcesLoadingState());
     try{
@@ -62,7 +58,9 @@ class HomeCubit extends Cubit<HomeStates> {
    Future <void> getNews({String? search}) async {
      emit(HomeGetNewsLoadingState());
      try{
-    NewsResponse newsResponse=await homeRepo.getNews(sourcesList[selectedIndex].id??"",search: search);
+    NewsResponse newsResponse=await homeRepo.
+    getNews(sourcesList[selectedIndex].id??"",
+        search:search);
       articlesList=newsResponse.articles??[];
       emit(HomeGetNewsSuccessState());
     }catch(e){
@@ -71,17 +69,9 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  changeLanguage(String langCode){
-    languageCode=langCode;
-  emit(HomeChangeLanguage());
-  }
 
-  changeMode(ThemeMode mode){
-    modeApp=mode;
-    emit(HomeChangeTheme());
-  }
 
-  onCatClick(category) {
+  /*onCatClick(category) {
     categoryModel = category;
   emit( HomeGetCategory());
   }
@@ -92,5 +82,5 @@ class HomeCubit extends Cubit<HomeStates> {
     } else if (id == DrawerTab.set_id) {}
    emit(HomeGetDrawer());
     Navigator.pop;
-  }
+  }*/
 }

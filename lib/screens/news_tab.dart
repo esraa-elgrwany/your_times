@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewsTab extends StatelessWidget {
   CategoryModel cat;
-  String? search;
+ String? search;
 
-  NewsTab(this.cat, {this.search});
+  NewsTab(this.cat,{this.search});
 
   @override
   Widget build(BuildContext context) {

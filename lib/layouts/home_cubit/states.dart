@@ -12,9 +12,7 @@ class HomeGetDrawer extends HomeStates {}
 
 class HomeGetCategory extends HomeStates {}
 
-class HomeChangeLanguage extends HomeStates {}
 
-class HomeChangeTheme extends HomeStates {}
 
 class HomeGetSourcesLoadingState extends HomeStates {}
 
