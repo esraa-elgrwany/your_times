@@ -17,7 +17,6 @@ class LanguageBottomSheet extends StatelessWidget{
   },
   builder: (context, state) {
     return Container(
-      color: Theme.of(context).colorScheme.background,
       padding: EdgeInsets.all(12),
       child: Column(
         children: [
@@ -32,19 +31,19 @@ class LanguageBottomSheet extends StatelessWidget{
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!.copyWith(
-                    color:Theme.of(context).colorScheme.onPrimary
+                    color:Theme.of(context).colorScheme.surface
                   )
 
                 ),
                 Spacer(),
                 (MainCubit.get(context).languageCode == "en")
                    ? Icon(Icons.done,
-                    size: 25, color:Theme.of(context).colorScheme.onPrimary)
+                    size: 25, color:green)
                     : SizedBox.shrink(),
               ],
             ),
           ),
-          Divider( color:Theme.of(context).colorScheme.onPrimary,
+          Divider( color:Theme.of(context).colorScheme.primary,
             thickness: 2,
             indent: 40,
             endIndent: 40,
@@ -60,7 +59,7 @@ class LanguageBottomSheet extends StatelessWidget{
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!.copyWith(
-                      color:Theme.of(context).colorScheme.onPrimary
+                      color:Theme.of(context).colorScheme.surface
                   )
 
                 ),
@@ -69,7 +68,7 @@ class LanguageBottomSheet extends StatelessWidget{
                     ? SizedBox.shrink()
                     : Icon(
                   Icons.done,
-                  color:Theme.of(context).colorScheme.onPrimary,
+                  color:green,
                   size: 25,
                 ),
               ],

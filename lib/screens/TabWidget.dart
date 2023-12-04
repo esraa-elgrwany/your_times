@@ -18,7 +18,7 @@ class TabWidget extends StatelessWidget{
           onTap: (index) {
            HomeCubit.get(context).changeSource(index);
           },
-          indicatorColor: Colors.transparent,
+          indicatorColor:Colors.transparent,
           tabs:
           HomeCubit.get(context).sourcesList.map((source) =>Tab(
             child: ChipItem(source, HomeCubit.get(context).sourcesList.

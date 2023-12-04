@@ -2,6 +2,7 @@ import 'package:esraa_news_app/screens/setting/setting_tab.dart';
 import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerTab extends StatelessWidget {
   Function onClick;
@@ -16,7 +17,7 @@ class DrawerTab extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width * .6,
-        color: Colors.white,
+        color:Theme.of(context).colorScheme.onSecondary,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -24,7 +25,7 @@ class DrawerTab extends StatelessWidget {
             Container(
               color: green,
               width: double.infinity,
-              height: 100,
+              height: 100.h,
               child: Center(
                   child: Text(
                 AppLocalizations.of(context)!.appTitle,
@@ -50,11 +51,14 @@ class DrawerTab extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.list,
-                              size: 25,
-                              color: grey,
+                              size: 25.sp,
+                              color:green,
                             )),
                         Text(AppLocalizations.of(context)!.category,
-                            style: Theme.of(context).textTheme.bodyMedium),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                !.copyWith(
+                              color:Theme.of(context).colorScheme.surface
+                            )),
                       ],
                     ),
                   ),
@@ -72,14 +76,16 @@ class DrawerTab extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.settings,
-                              size: 25,
-                              color: grey,
+                              size: 25.sp,
+                              color:green,
                             )),
                         SizedBox(
-                          width: 4,
+                          width: 4.w,
                         ),
                         Text(AppLocalizations.of(context)!.setting,
-                            style: Theme.of(context).textTheme.bodyMedium),
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color:Theme.of(context).colorScheme.surface
+                            )),
                       ],
                     ),
                   )

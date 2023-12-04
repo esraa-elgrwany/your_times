@@ -1,5 +1,6 @@
 import 'package:esraa_news_app/models/NewsResponse.dart';
 import 'package:esraa_news_app/screens/news_details.dart';
+import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,7 +20,7 @@ class NewsItem extends StatelessWidget {
       child: Card(
         shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
-            borderSide: BorderSide(color: Colors.transparent)),
+            borderSide: BorderSide(color:green)),
         child: Column(
           children: [
             ClipRRect(
@@ -43,7 +44,7 @@ class NewsItem extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF42505C),
+                  color:Theme.of(context).colorScheme.surface,
                 ),
               ),
             ),

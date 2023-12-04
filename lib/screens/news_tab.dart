@@ -9,9 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewsTab extends StatelessWidget {
   CategoryModel cat;
- String? search;
 
-  NewsTab(this.cat,{this.search});
+  NewsTab(this.cat);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class NewsTab extends StatelessWidget {
               ),
             );
           }else if(state is HomeGetSourcesSuccessState || state is HomeChangeSource){
-            HomeCubit.get(context).getNews(search: search);
+            HomeCubit.get(context).getNews();
           }
           else if(state is HomeGetNewsSuccessState){
             Navigator.pop(context);

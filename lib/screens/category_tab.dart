@@ -2,6 +2,7 @@ import 'package:esraa_news_app/models/category-model.dart';
 import 'package:esraa_news_app/screens/category_item.dart';
 import 'package:flutter/material.dart';
 import 'package:esraa_news_app/shared/styles/my_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CategoryTab extends StatelessWidget {
   List<CategoryModel>category;
   Function onClick;
@@ -17,14 +18,16 @@ class CategoryTab extends StatelessWidget {
           Text(
             """Pick your category 
  of interest""",
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.surface
+            ),
           ),
-       SizedBox(height: 10,),
+       SizedBox(height:40.h,),
       Expanded(
               child: GridView(gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-              crossAxisSpacing:18,
-              mainAxisSpacing: 18),
+              crossAxisSpacing:24,
+              mainAxisSpacing: 24),
                 children:category.map((cate) =>InkWell(
                   onTap: () {
                     onClick(cate);

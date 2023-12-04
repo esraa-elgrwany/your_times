@@ -4,6 +4,7 @@ import 'package:esraa_news_app/models/category-model.dart';
 import 'package:esraa_news_app/screens/Drawer_tab.dart';
 import 'package:esraa_news_app/screens/category_tab.dart';
 import 'package:esraa_news_app/screens/news_tab.dart';
+import 'package:esraa_news_app/screens/search/news_search.dart';
 import 'package:esraa_news_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,21 +25,12 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> category = CategoryModel.getCategory();
-    return BlocProvider(
-      create: (context) =>HomeCubit(RemoteDs()),
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/pattern.png"),
-              fit: BoxFit.fill),
-          color: Colors.white,
-        ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
+    return  Scaffold(
+          backgroundColor:Theme.of(context).colorScheme.onSecondary,
           drawer: DrawerTab(onDrawerClick),
           appBar: search ?
           AppBar(
-            toolbarHeight: 70,
+            toolbarHeight: 100,
             centerTitle: true,
             backgroundColor: green,
             titleTextStyle:
@@ -122,14 +114,14 @@ class _HomeLayoutState extends State<HomeLayout> {
           ),
           body:
           categoryModel == null
-              ? CategoryTab(category, onCatClick)
-              :
+              ? searchController.text.isEmpty?
+          CategoryTab(category, onCatClick)
+              : NewsSearch()
+         :searchController.text.isEmpty?
           NewsTab(
             categoryModel!,
-            search: searchController.text,
-          ),
-        ),
-      ),
+          )
+          :NewsSearch()
     );
   }
 

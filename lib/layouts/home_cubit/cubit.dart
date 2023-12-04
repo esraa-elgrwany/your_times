@@ -20,8 +20,7 @@ class HomeCubit extends Cubit<HomeStates> {
   List<Sources>sourcesList=[];
   List<Articles> articlesList=[];
   int selectedIndex=0;
-//  bool searched=false;
-//  String search='';
+
 
  // TextEditingController searchController=TextEditingController();
 
@@ -58,12 +57,22 @@ class HomeCubit extends Cubit<HomeStates> {
    Future <void> getNews({String? search}) async {
      emit(HomeGetNewsLoadingState());
      try{
+       if(sourcesList.isEmpty){
+         NewsResponse newsResponse=await homeRepo.
+         getNews
+           (search:search);
+         articlesList=newsResponse.articles??[];
+         emit(HomeGetNewsSuccessState());
+       }else{
     NewsResponse newsResponse=await homeRepo.
-    getNews(sourcesList[selectedIndex].id??"",
+    getNews
+       (sourceId:
+        sourcesList[selectedIndex].id??"",
         search:search);
       articlesList=newsResponse.articles??[];
       emit(HomeGetNewsSuccessState());
-    }catch(e){
+    }
+     }catch(e){
       emit(HomeGetNewsErrorState());
       throw e;
     }

@@ -69,7 +69,7 @@ class NewsDetails extends StatelessWidget{
                                 style: GoogleFonts.poppins(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0xFF42505C),
+                                  color:Theme.of(context).colorScheme.surface,
                                 ),
                               ),
 
@@ -82,21 +82,20 @@ class NewsDetails extends StatelessWidget{
                                    color: Colors.transparent
                                )
                            ),
-                           color: Colors.white,
                            child: Padding(
                              padding: const EdgeInsets.all(24).w,
                              child: Expanded(
                                child: Column(
                                  children: [
                                    Text(articles.description??"",style: GoogleFonts.poppins(
-                                     fontSize: 13.sp,
+                                     fontSize: 14.sp,
                                      fontWeight: FontWeight.w400,
-                                     color: Color(0xFF42505C),
+                                     color:Theme.of(context).colorScheme.surface,
                                    ),),
                                    Text(articles.content??"",style: GoogleFonts.poppins(
-                                     fontSize: 13.sp,
+                                     fontSize: 14.sp,
                                      fontWeight: FontWeight.w400,
-                                     color: Color(0xFF42505C),
+                                     color:Theme.of(context).colorScheme.surface,
                                    ),),
                                    Spacer(),
                                     Row(
@@ -105,13 +104,13 @@ class NewsDetails extends StatelessWidget{
                                          Text("View Full Article",style: GoogleFonts.poppins(
                                            fontSize: 14.sp,
                                            fontWeight: FontWeight.w500,
-                                           color: Color(0xFF42505C),
+                                           color: Theme.of(context).colorScheme.surface,
                                          ),),
                                          IconButton(onPressed:() {
                                           Uri url=Uri.parse(articles.url??"");
                                           launchUrl(url);
                                          }, icon: Icon(Icons.arrow_right_outlined,
-                                           color: Color(0xFF303030),size: 30,))
+                                           color: green,size: 35,))
                                        ],
                                      ),
                                  ],

@@ -4,7 +4,7 @@ import 'package:esraa_news_app/models/SourceResponse.dart';
 
 class LocalDs implements HomeRepo{
   @override
-  Future<NewsResponse> getNews(String sourceId, {String? search}) {
+  Future<NewsResponse> getNews({String? sourceId, String? search}) {
     // TODO: implement getNews
     throw UnimplementedError();
   }

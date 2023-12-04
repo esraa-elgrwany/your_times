@@ -24,9 +24,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return MultiBlocProvider(
+  providers: [
+    BlocProvider(
   create: (context) => MainCubit(),
-  child: BlocConsumer<MainCubit, MainState>(
+),
+    BlocProvider(
+      create: (context) => HomeCubit(RemoteDs()),
+    ),
+  ],
+  child:
+     BlocConsumer<MainCubit, MainState>(
   listener: (context, state) {
     // TODO: implement listener
   },
@@ -35,7 +43,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(412, 870),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
+      builder: (context, child) =>
+      MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
@@ -52,7 +61,7 @@ class MyApp extends StatelessWidget {
       ),
     );
   },
-),
+)
 );
   }
 }

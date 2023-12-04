@@ -43,70 +43,78 @@ class _SettingTabState extends State<SettingTab> {
         title: Text(AppLocalizations.of(context)!.appTitle),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8).w,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(AppLocalizations.of(context)!.lang,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface
-                  )
-                      ),
-             Container(
-                  padding: EdgeInsets.all(10).w,
-                  margin: EdgeInsets.all(10).w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                    color:Theme.of(context).colorScheme.surface,
-                      border: Border.all(color: Theme.of(context).colorScheme.onPrimary,
-                        width: 2
-                      )),
-                  child: Row(
-                    children: [
-                      Text(MainCubit.get(context).languageCode=="en"?
-                      AppLocalizations.of(context)!.en
-                          :AppLocalizations.of(context)!.ar,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(color: Theme.of(context).colorScheme.primary)),
-                         Spacer(),
-                         InkWell(
-                           onTap: showLangugeBottomSheet,
-                             child: Icon(Icons.arrow_drop_down,size: 30)),
-                    ],
-                  ),
-                ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Text(AppLocalizations.of(context)!.theme,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-      color: Theme.of(context).colorScheme.onSurface
-      )),
-              Container(
-                  padding: EdgeInsets.all(10).w,
-                  margin: EdgeInsets.all(10).w,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color:Theme.of(context).colorScheme.onPrimary,
-                      width: 2)),
-                  child: Row(
-                    children: [
-                      Text(MainCubit.get(context).modeApp==ThemeMode.light?AppLocalizations.of(context)!.light:AppLocalizations.of(context)!.dark,
-                          style:
-                          Theme.of(context).textTheme.bodySmall!.
-                          copyWith(color:Theme.of(context).colorScheme.primary)),
-                      Spacer(),
-                      InkWell(
-                          onTap: showThemingBottomSheet,
-                          child: Icon(Icons.arrow_drop_down,size: 30)),
-                    ],
-                  ),
-                ),
-            ],
+        padding: const EdgeInsets.all(32),
+        child: Card(
+          shape:OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: green),
+          //gapPadding: 12
           ),
+          child: Container(
+            padding: EdgeInsets.all(24),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(AppLocalizations.of(context)!.lang,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.surface
+                      )
+                          ),
+                 Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(color: Theme.of(context).colorScheme.primary,
+                            width: 2.w
+                          )),
+                      child: Row(
+                        children: [
+                          Text(MainCubit.get(context).languageCode=="en"?
+                          AppLocalizations.of(context)!.en
+                              :AppLocalizations.of(context)!.ar,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: Theme.of(context).colorScheme.surface)),
+                             Spacer(),
+                             InkWell(
+                               onTap: showLangugeBottomSheet,
+                                 child: Icon(Icons.arrow_drop_down,size: 30,color:Theme.of(context).colorScheme.surface ,)),
+                        ],
+                      ),
+                    ),
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  Text(AppLocalizations.of(context)!.theme,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+      color: Theme.of(context).colorScheme.surface
+      )),
+                  Container(
+                      padding: EdgeInsets.all(10).w,
+                      margin: EdgeInsets.all(10).w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(color:Theme.of(context).colorScheme.primary,
+                          width: 2)),
+                      child: Row(
+                        children: [
+                          Text(MainCubit.get(context).modeApp==ThemeMode.light?AppLocalizations.of(context)!.light:AppLocalizations.of(context)!.dark,
+                              style:
+                              Theme.of(context).textTheme.bodyMedium!.
+                              copyWith(color:Theme.of(context).colorScheme.surface)),
+                          Spacer(),
+                          InkWell(
+                              onTap: showThemingBottomSheet,
+                              child: Icon(Icons.arrow_drop_down,size: 30,color: Theme.of(context).colorScheme.surface,)),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+          ),
+        ),
       ),
     );
   },

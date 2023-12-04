@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class RemoteDs implements HomeRepo{
   @override
-  Future<NewsResponse> getNews(String sourceId, {String? search}) async{
+  Future<NewsResponse> getNews({String? sourceId, String? search}) async{
     Uri url = Uri.https(baseUrl, "/v2/everything",
         {"apiKey": apiKey,
           "sources":sourceId ,

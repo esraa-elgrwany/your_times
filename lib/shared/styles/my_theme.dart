@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'colors.dart';
@@ -9,11 +10,11 @@ class MyThemeData{
     colorScheme: ColorScheme(
         brightness: Brightness.light,
         primary:green, onPrimary:green, secondary: Colors.black,
-        onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
+        onSecondary:Colors.white, error: Colors.red, onError: Colors.red,
         background:Colors.white,
         onBackground:Colors.white,
-        surface:Colors.white,
-        onSurface: Colors.black),
+        surface:Colors.black,
+        onSurface: Colors.white),
 
       appBarTheme: AppBarTheme(
         centerTitle: true,
@@ -24,16 +25,16 @@ class MyThemeData{
       ),
     textTheme: TextTheme(
       bodySmall: GoogleFonts.exo(
-        fontSize: 14,
+        fontSize: 14.sp,
         color:Colors.white,
       ),
       bodyMedium: GoogleFonts.poppins(
-        fontSize: 22,
-        fontWeight: FontWeight.bold,
+        fontSize: 18.sp,
+        fontWeight: FontWeight.w500,
         color:grey,
       ),
       bodyLarge: GoogleFonts.exo(
-        fontSize: 22,
+        fontSize: 22.sp,
         color:Colors.white,
       ),
     ),
@@ -41,32 +42,32 @@ class MyThemeData{
   static ThemeData darkTheme=ThemeData(
     colorScheme: ColorScheme(
         brightness: Brightness.dark,
-        primary:Colors.grey, onPrimary:Colors.white10, secondary: Colors.black,
+        primary:green, onPrimary:Colors.white10, secondary: Colors.white,
         onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
         background:Colors.grey,
         onBackground:Colors.white,
         surface:Colors.white,
-        onSurface: Colors.black),
+        onSurface: grey),
 
     appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: Colors.black,
+        color: green,
         iconTheme: IconThemeData(
             color: Colors.white
         )
     ),
     textTheme: TextTheme(
       bodySmall: GoogleFonts.exo(
-        fontSize: 14,
+        fontSize: 14.sp,
         color:Colors.white,
       ),
       bodyMedium: GoogleFonts.poppins(
-        fontSize: 22,
-        fontWeight: FontWeight.bold,
+        fontSize: 18.sp,
+        fontWeight: FontWeight.w500,
         color:Colors.white,
       ),
       bodyLarge: GoogleFonts.exo(
-        fontSize: 22,
+        fontSize: 22.sp,
         color:Colors.white,
       ),
     ),
